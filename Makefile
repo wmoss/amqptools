@@ -1,10 +1,10 @@
 
 ifeq (${AMQPTOOLS_RABBITHOME},)
-    AMQPTOOLS_RABBITHOME = "/usr/local/src/rabbitmq/rabbitmq-c"
+    AMQPTOOLS_RABBITHOME = /usr/local/src/rabbitmq/rabbitmq-c
 endif
 
 ifeq (${AMQPTOOLS_INSTALLROOT},)
-    AMQPTOOLS_INSTALLROOT = "/usr/local/bin"
+    AMQPTOOLS_INSTALLROOT = /usr/local/bin
 endif
 
 
