@@ -7,6 +7,11 @@ ifeq (${AMQPTOOLS_INSTALLROOT},)
     AMQPTOOLS_INSTALLROOT = /usr/local/bin
 endif
 
+ifeq (${AMQPTOOLS_DYNAMICLINK},)
+    AMQPTOOLS_LDFLAGS = $(AMQPTOOLS_RABBITHOME)/librabbitmq/.libs/librabbitmq.so
+else
+    AMQPTOOLS_LDFLAGS = -lrabbitmq
+endif
 
 all: clean build
 
@@ -21,10 +26,10 @@ uninstall:
 	rm -f $(AMQPTOOLS_INSTALLROOT)/amqpsend
 
 amqpspawn: amqpspawn.c
-	gcc -o bin/amqpspawn amqpspawn.c -I$(AMQPTOOLS_RABBITHOME)/librabbitmq $(AMQPTOOLS_RABBITHOME)/librabbitmq/.libs/librabbitmq.so
+	gcc -o bin/amqpspawn amqpspawn.c -I$(AMQPTOOLS_RABBITHOME)/librabbitmq $(AMQPTOOLS_LDFLAGS)
 
 amqpsend: amqpsend.c
-	gcc -o bin/amqpsend amqpsend.c -I$(AMQPTOOLS_RABBITHOME)/librabbitmq $(AMQPTOOLS_RABBITHOME)/librabbitmq/.libs/librabbitmq.so
+	gcc -o bin/amqpsend amqpsend.c -I$(AMQPTOOLS_RABBITHOME)/librabbitmq $(AMQPTOOLS_LDFLAGS)
 
 clean:
 	rm -f bin/amqpsend bin/amqpspawn
